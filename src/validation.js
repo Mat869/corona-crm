@@ -57,7 +57,7 @@ class Form {
         let day = parseInt(newDate[0]);
         let month = parseInt(newDate[1]);
         let year = parseInt(newDate[2]);
-        if(month === 2 && day >29) {
+        if(month === 2 && day > 29 || month === 4 && day > 30 || month === 6 && day > 30 || month === 7 && day > 30 || month === 9 && day > 30 || month === 11 && day > 30) {
             return false;
         }
         return day >=1 &&
