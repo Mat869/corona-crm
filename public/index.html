@@ -2,14 +2,17 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    </head>
+        <link rel="stylesheet" href="index.css" />
+        <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.4/css/boxicons.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap" rel="stylesheet">
+      </head>
     <body>
-        <div class="header mb-1 mt-4">
+        <div id="header" class="header mb-1 mt-4">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-start">
                         <div class="col">
-                            <h1 class="h3 ml-3">
+                            <h1 id="title" class="h3 ml-3">
                                 Corona CRM
                             </h1>
                         </div>
@@ -22,45 +25,50 @@
                 <div class="col-12 col-md-4">
                     <div class="card mt-3">
                       <div class="card-body">
-                        <h1 class="card-header-title h5 mb-5 mt-3">
-                            Create New Customer
-                        </h1>
+                        <div>
+                          <h1 class="d-flex align-items-center h5 mb-5 mt-3">
+                              <i class="bx bx-user-plus bx-md mr-2"></i>
+                              Create New Customer
+                          </h1>
+                        </div>
                         <form>
-                            <div class="row row-space mb-3">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1">Full Name</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Your name...">
-                                  </div>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" aria-label="Name">Full name</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" placeholder="Your name...">
                             </div>
-                            <div class="row row-space mb-3">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1">Email</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Your email...">
-                                  </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" aria-label="email">Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" class="form-control" placeholder="Email">
                             </div>
-                            <div class="row row-space mb-3">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1">Birth date</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Your birthdate...">
-                                  </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" aria-label="Birthdate">Birthdate</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" placeholder="dd/mm/yy">
                             </div>
-                            <div class="row row-space mb-3">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1">Notes</span>
-                                    </div>
-                                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                                  </div>
+                          </div>
+                          <div class="form-group row mb-4">
+                            <label class="col-sm-4 col-form-label">Notes</label>
+                            <div class="col-sm-8">
+                              <textarea class="form-control" aria-label="With textarea"></textarea>
                             </div>
+                          </div>
+                          <div class="row row-space d-flex justify-content-center mb-3">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <label class="form-check-label">
+                                Over 18 years old?
+                              </label>
+                            </div>
+                          </div>
+                          <div class="row row-space d-flex justify-content-center mb-3">
                             <div>
-                                <button class="btn bnt--radius-2 btn--blue" type="submit">Submit</button>
-                            </div>
+                              <a id="createUser" class="btn bnt--radius-2 btn--blue" type="submit">create</a>
+                          </div>
+                          </div>
                         </form>
                       </div>  
                     </div>
@@ -69,7 +77,7 @@
                     <div class="card mt-3">
                         <div class="card-body">
                             <table class="table">
-                                <thead class="thead-dark">
+                                <thead class="thead">
                                     <tr>
                                       <th scope="col">#</th>
                                       <th scope="col">Full name</th>
@@ -86,7 +94,14 @@
                                       <td>Mail</td>
                                       <td>Date</td>
                                       <td>Date</td>
-                                      <td></td>
+                                      <td>
+                                        <button class="btn">
+                                          <i class="bx bx-edit" ></i>
+                                        </button>
+                                        <button class="btn">
+                                          <i class="bx bx-trash"></i>
+                                        </button>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <th scope="row">2</th>
@@ -94,7 +109,14 @@
                                       <td>Mail</td>
                                       <td>Date</td>
                                       <td>Date</td>
-                                      <td></td>
+                                      <td>
+                                        <button class="btn">
+                                          <i class="bx bx-edit" ></i>
+                                        </button>
+                                        <button class="btn">
+                                          <i class="bx bx-trash"></i>
+                                        </button>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <th scope="row">3</th>
@@ -102,7 +124,14 @@
                                       <td>Mail</td>
                                       <td>Date</td>
                                       <td>Date</td>
-                                      <td></td>
+                                      <td>
+                                        <button class="btn">
+                                          <i class="bx bx-edit" ></i>
+                                        </button>
+                                        <button class="btn">
+                                          <i class="bx bx-trash"></i>
+                                        </button>
+                                      </td>
                                     </tr>
                                   </tbody>
                             </table>
