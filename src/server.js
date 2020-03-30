@@ -16,19 +16,16 @@ app.get('/', (req, res) => {
 });
 
 app.put('/customer', (req, res) => {
-    //console.log(req.body);
     if(!validation(req.body.name, req.body.email, req.body.birthdate, req.body.creationDate, req.body.notes, req.body.overEighteen)) {
         res.status(400).send();
         return;
     }
     customers.push({
-        id: users.length + 1,
+        id: customers.length + 1,
         name: req.body.name,
 		email: req.body.email,
 		birthdate: req.body.birthdate,
-		creationDate: null,
 		notes: req.body.notes,
-		overEighteen: false
     });
     res.status(201).send();
 });

@@ -31,34 +31,34 @@
                               Create New Customer
                           </h1>
                         </div>
-                        <form>
+                        <form id="new-customer-form">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" aria-label="Name">Full name</label>
                             <div class="col-sm-8">
-                              <input class="form-control" placeholder="Your name...">
+                              <input class="form-control" name="name" placeholder="Your name...">
                             </div>
                           </div>
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" aria-label="email">Email</label>
                             <div class="col-sm-8">
-                              <input type="email" class="form-control" placeholder="Email">
+                              <input type="email" class="form-control" name="email" placeholder="Email">
                             </div>
                           </div>
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" aria-label="Birthdate">Birthdate</label>
                             <div class="col-sm-8">
-                              <input class="form-control" placeholder="dd/mm/yy">
+                              <input class="form-control" name="birthdate" placeholder="dd/mm/yy">
                             </div>
                           </div>
                           <div class="form-group row mb-4">
                             <label class="col-sm-4 col-form-label">Notes</label>
                             <div class="col-sm-8">
-                              <textarea class="form-control" aria-label="With textarea"></textarea>
+                              <textarea class="form-control" name="notes" aria-label="With textarea"></textarea>
                             </div>
                           </div>
                           <div class="row row-space d-flex justify-content-center mb-3">
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="">
+                              <input class="form-check-input" name="overEighteen" type="checkbox" value="">
                               <label class="form-check-label">
                                 Over 18 years old?
                               </label>
@@ -67,7 +67,7 @@
                           <div class="row row-space d-flex justify-content-center mb-3">
                             <div>
                               <button id="createUser" class="btn bnt--radius-2 btn--blue" type="submit">create</button>
-                          </div>
+                            </div>
                           </div>
                         </form>
                       </div>  
@@ -140,5 +140,6 @@
                 </div>
             </div>
         </div>
+        <script src="scripts.js"></script>
     </body>
 </html>
