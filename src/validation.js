@@ -1,7 +1,7 @@
 class Form {
 
     isName (str) {
-        if(str.indexOf(' ') !== -1) {
+        if(str.includes(' ')) {
             return true;
         }
         return false;
