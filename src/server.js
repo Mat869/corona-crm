@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const isEmail = require('./utils/is-email');
+const isFullName = require('./utils/is-full-name');
 const app = express();
-const validation = require('./validation');
 const port = 3000;
 
 app.use(express.static('public')); // to overcome CORS
@@ -16,58 +17,68 @@ app.get('/', (req, res) => {
 });
 
 app.put('/customer', (req, res) => {
-    if(!validation(req.body.name, req.body.email, req.body.birthdate, req.body.creationDate, req.body.notes, req.body.overEighteen)) {
+    if(! validateCustomer(req.body.fullName, req.body.email)) {
         res.status(400).send();
         return;
     }
-    customers.push({
-        id: customers.length + 1,
-        name: req.body.name,
+	const index = customers.push({
+		id: customers.length + 1,
+		fullName: req.body.fullName,
 		email: req.body.email,
-		birthdate: req.body.birthdate,
-		notes: req.body.notes,
-    });
-    res.status(201).send();
+		birthDate: req.body.birthDate,
+		notes: req.body.notes
+	});
+	res.status(201).json(customers[index]);
 });
 
-app.get('/customer/', (req, res) => {
-    res.json(customers);
-});
-
-app.get('/customer/:id', (req, res) => {
-    const requestedCustomer = customers.find(customer => { 
-        return customer.id === parseInt(req.params.id); 
-    });
-    if (!requestedCustomer) { 
-        res.status(404).send();
-        return;
-    }
-    res.status(200).json(requestedCustomer);
+app.get('/customer', (req, res) => {
+	res.json(customers);
 });
 
 app.post('/customer/:id', (req, res) => {
-    const requestedCustomer = customers.find(customer => {
-        return customer.id === parseInt(req.params.id);
-    });
-    if(!requestedCustomer) {
-        res.status(404).send();
-        return;
-    }
-    res.status(200).send();
+	const requestedCustomer = customers.find(customer => {
+		return customer.id === parseInt(req.params.id);
+	});
+
+	if(! requestedCustomer) {
+		res.sendStatus(404);
+		return;
+	}
+
+	if(! validateCustomer(req.body.fullName, req.body.email)) {
+		res.sendStatus(400);
+		return;
+	}
+
+	const index = customers.indexOf(requestedCustomer);
+	customers[index] = {
+        id: index + 1,
+		fullName: req.body.fullName,
+		email: req.body.email,
+		birthDate: req.body.birthDate,
+		notes: req.body.notes
+	};
+	res.json(customers[index]);
 });
 
 app.delete('/customer/:id', (req, res) => {
-    const requestedCustomer = customers.find(customer => {
-        return customer.id === parseInt(req.params.id);
-    });
-    if (!requestedCustomer) {
-        res.status(404).send();
-        return;
-    }
-    const index = customers.indexOf(requestedCustomer);
-    customers.splice(index, 1);
-    res.status(204).send();
+	const requestedCustomer = customers.find(customer => {
+		return customer.id === parseInt(req.params.id);
+	});
+
+	if(!requestedCustomer) {
+		res.sendStatus(404);
+		return;
+	}
+
+	const index = customers.indexOf(requestedCustomer);
+	customers.splice(index, 1);
+	res.json(requestedCustomer);
 });
+
+function validateCustomer(fullName, email) {
+	return isFullName(fullName) && isEmail(email);
+}
 
 app.listen(port, () => {
 	console.log('App is listening on port ' + port);

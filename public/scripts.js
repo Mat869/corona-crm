@@ -1,6 +1,7 @@
 const API_URL = 'http://localhost:3000';
 const newCustomerForm = document.getElementById('new-customer-form');
 const customerList = document.getElementById('customer-list');
+const editCustomerForm = document.getElementById('edit-customer-form');
 
 refreshCustomerList();
 
@@ -12,7 +13,7 @@ newCustomerForm.addEventListener('submit', (e) => {
 	}
 
 	createCustomer({
-		name: newCustomerForm.name.value,
+		fullName: newCustomerForm.fullName.value,
 		email: newCustomerForm.email.value,
 		birthDate: newCustomerForm.birthDate.value,
 		notes: newCustomerForm.notes.value
@@ -28,6 +29,12 @@ function createCustomer(customer) {
 			'Content-Type': 'application/json'
 		}
 	});
+}
+
+function openEditCustomerModal(customer) {
+	openModal();
+	editCustomerForm.setAttribute('id', customer.id);
+	console.log(editCustomerForm.id);
 }
 
 function getCustomers() {
@@ -55,9 +62,41 @@ function buildCustomerRow(customer) {
 		<td>${customer.email}</td>
 		<td>${customer.birthDate}</td>
 		<td>---</td>
-		<td class="text-center">
-            <button class="btn btn-sm btn-edit"><i class="far fa-edit"></i></button>
-            <button class="btn btn-sm btn-delete"><i class="far fa-trash-alt"></i></button>
+		<td class="">
+            <button class="btn btn-sm btn-edit"><i class="bx bx-sm bx-edit" id="editBtn" ></i></button>
+            <button class="btn btn-sm btn-delete"><i class="bx bx-sm bx-trash" id="trashBtn" ></i></button>
         </td>`;
+	row.querySelector('.btn-edit').addEventListener('click', () => {
+		console.log(customer);
+		openEditCustomerModal(customer);
+	});
 	return row;
+}
+
+editCustomerForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	if(! validate(editCustomerForm)) {
+		return;
+	}
+	editCustomer({
+		id: editCustomerForm.id,
+		fullName: editCustomerForm.fullName.value,
+		email: editCustomerForm.email.value,
+		birthDate: editCustomerForm.birthDate.value,
+		notes: editCustomerForm.notes.value
+	}).then(refreshCustomerList)
+		.catch(console.log);
+	
+	closeModal();
+});
+
+function editCustomer(customer) {
+	return fetch(API_URL + `/customer/${customer.id}`, {
+		method: 'POST',
+		body: JSON.stringify(customer),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
 }

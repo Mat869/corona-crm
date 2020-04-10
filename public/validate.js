@@ -10,8 +10,8 @@ function validate(form) {
 		isValid = false;
 	}
 
-	if(! isFullName(form.name.value)) {
-		form.querySelector('.name .invalid-feedback').style.display = 'block';
+	if(! isFullName(form.fullName.value)) {
+		form.querySelector('.fullName .invalid-feedback').style.display = 'block';
 		isValid = false;
 	}
 
@@ -28,7 +28,7 @@ function isEmail(email) {
 	return re.test(String(email).toLowerCase());
 }
 
-function isFullName(name) {
-	const parts = name.split(' ');
+function isFullName(fullName) {
+	const parts = fullName.split(' ');
 	return parts.length === 2;
 }

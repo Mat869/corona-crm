@@ -2,11 +2,65 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="style.css" />
         <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.4/css/boxicons.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap" rel="stylesheet">
       </head>
     <body>
+      <div class="backdrop" id="modal">
+        <div class="modal-box card">
+          <div class="d-flex justify-content-end">
+            <button id="close-modal" type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div>
+            <h1 class="d-flex justify-content-center h5 mb-5 mt-3">
+                Edit Customer
+            </h1>
+          </div>
+          <form id="edit-customer-form">
+            <div class="form-group row fullName">
+              <label class="col-sm-4 col-form-label" aria-label="name">Full name</label>
+              <div class="col-sm-8">
+                <input class="form-control" name="fullName" placeholder="Your name...">
+                <div class="invalid-feedback">Full name is invalid</div>
+              </div>
+            </div>
+            <div class="form-group row email">
+              <label class="col-sm-4 col-form-label" aria-label="email">Email</label>
+              <div class="col-sm-8">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+                <div class="invalid-feedback">Email is invalid</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" aria-label="Birthdate">Birthdate</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="date" name="birthDate" />
+              </div>
+            </div>
+            <div class="form-group row mb-4">
+              <label class="col-sm-4 col-form-label">Notes</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" name="notes" aria-label="With textarea"></textarea>
+              </div>
+            </div>
+            <div class="row row-space d-flex justify-content-center mb-3 over18">
+              <div class="form-check">
+                <input class="form-check-input" name="over18" type="checkbox" value="" id="over18_2" />
+                <label for="over18" class="form-check-label">Over 18 years old?</label>
+                <div class="invalid-feedback">You must check this</div>
+              </div>
+            </div>
+            <div class="row row-space d-flex justify-content-center mb-3">
+              <div>
+                <button id="btn-edit-customer" class="btn bnt--radius-2 btn--blue" type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
         <div id="header" class="header mb-1 mt-4">
             <div class="container-fluid">
                 <div class="header-body">
@@ -32,22 +86,24 @@
                           </h1>
                         </div>
                         <form id="new-customer-form">
-                          <div class="form-group row">
+                          <div class="form-group row fullName">
                             <label class="col-sm-4 col-form-label" aria-label="name">Full name</label>
                             <div class="col-sm-8">
-                              <input class="form-control" name="name" placeholder="Your name...">
+                              <input class="form-control" name="fullName" placeholder="Your name..." />
+                              <div class="invalid-feedback">Full name is invalid</div>
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <div class="form-group row email">
                             <label class="col-sm-4 col-form-label" aria-label="email">Email</label>
                             <div class="col-sm-8">
-                              <input type="email" class="form-control" name="email" placeholder="Email">
+                              <input type="email" class="form-control" name="email" placeholder="Email" />
+                              <div class="invalid-feedback">Email is invalid</div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label" aria-label="Birthdate">Birthdate</label>
                             <div class="col-sm-8">
-                              <input class="form-control" name="birthdate" placeholder="dd/mm/yy">
+                              <input class="form-control" type="date" name="birthDate" />
                             </div>
                           </div>
                           <div class="form-group row mb-4">
@@ -56,17 +112,16 @@
                               <textarea class="form-control" name="notes" aria-label="With textarea"></textarea>
                             </div>
                           </div>
-                          <div class="row row-space d-flex justify-content-center mb-3">
+                          <div class="row row-space d-flex justify-content-center mb-3 over18">
                             <div class="form-check">
-                              <input class="form-check-input" name="overEighteen" type="checkbox" value="">
-                              <label class="form-check-label">
-                                Over 18 years old?
-                              </label>
+                              <input class="form-check-input" name="over18" type="checkbox" value="" id="over18" />
+                              <label for="over18" class="form-check-label">Over 18 years old?</label>
+                              <div class="invalid-feedback">You must check this</div>
                             </div>
                           </div>
                           <div class="row row-space d-flex justify-content-center mb-3">
                             <div>
-                              <button id="createUser" class="btn bnt--radius-2 btn--blue" type="submit">create</button>
+                              <button id="btn-create-customer" class="btn bnt--radius-2 btn--blue" type="submit">create</button>
                             </div>
                           </div>
                         </form>
@@ -87,59 +142,15 @@
                                       <th scope="col">Actions</th>
                                     </tr>
                                   </thead>
-                                  <tbody>
-                                    <tr>
-                                      <th scope="row">1</th>
-                                      <td>Mark</td>
-                                      <td>Mail</td>
-                                      <td>Date</td>
-                                      <td>Date</td>
-                                      <td>
-                                        <button class="btn">
-                                          <i class="bx bx-edit" ></i>
-                                        </button>
-                                        <button class="btn">
-                                          <i class="bx bx-trash"></i>
-                                        </button>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Mail</td>
-                                      <td>Date</td>
-                                      <td>Date</td>
-                                      <td>
-                                        <button class="btn">
-                                          <i class="bx bx-edit" ></i>
-                                        </button>
-                                        <button class="btn">
-                                          <i class="bx bx-trash"></i>
-                                        </button>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">3</th>
-                                      <td>Larry</td>
-                                      <td>Mail</td>
-                                      <td>Date</td>
-                                      <td>Date</td>
-                                      <td>
-                                        <button class="btn">
-                                          <i class="bx bx-edit" ></i>
-                                        </button>
-                                        <button class="btn">
-                                          <i class="bx bx-trash"></i>
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
+                                  <tbody id="customer-list"></tbody>
                             </table>
                         </div>  
                       </div>
                 </div>
             </div>
         </div>
+        <script src="modal.js"></script>
+        <script src="validate.js"></script>
         <script src="scripts.js"></script>
     </body>
 </html>

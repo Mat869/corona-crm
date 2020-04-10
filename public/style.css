@@ -1,0 +1,55 @@
+* {
+    font-family: Poppins;
+}
+
+#title {
+    color: red;
+}
+
+h1 {
+    color: #556ee5;
+}
+
+body {
+    background-color: #d4dbf8;
+}
+
+#btn-create-customer, #btn-edit-customer{
+    color: white;
+    background-color: #556ee5;
+    text-transform: capitalize;
+}
+
+thead {
+    color: white;
+    background-color: #556ee5;
+}
+
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box {
+    width: 500px;
+    max-width: 100%;
+    background: #ffffff;
+    padding: 15px;
+}
+
+#editBtn {
+    color: #556ee5;
+}
+
+#trashBtn {
+    color: red;
+}
