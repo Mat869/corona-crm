@@ -46,18 +46,18 @@ function refreshCustomerList() {
 		.then(res => res.json())
 		.then(customers => {
 			customerList.innerHTML = '';
-			customers.forEach(customer => {
-				const row = buildCustomerRow(customer);
+			customers.forEach((customer, i) => {
+				const row = buildCustomerRow(customer, i);
 				customerList.appendChild(row);
 			});
 		})
 		.catch(console.log);
 }
 
-function buildCustomerRow(customer) {
+function buildCustomerRow(customer, i) {
 	const row = document.createElement('tr');
 	row.innerHTML = `
-		<td>${customer.id}</td>
+		<td>${i + 1}</td>
 		<td>${customer.fullName}</td>
 		<td>${customer.email}</td>
 		<td>${customer.birthDate}</td>
@@ -69,6 +69,11 @@ function buildCustomerRow(customer) {
 	row.querySelector('.btn-edit').addEventListener('click', () => {
 		console.log(customer);
 		openEditCustomerModal(customer);
+	});
+	row.querySelector('.btn-delete').addEventListener('click', () => {
+		deleteCustomer(customer.id)
+			.then(refreshCustomerList)
+			.catch(console.log);
 	});
 	return row;
 }
@@ -95,6 +100,15 @@ function editCustomer(customer) {
 	return fetch(API_URL + `/customer/${customer.id}`, {
 		method: 'POST',
 		body: JSON.stringify(customer),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+}
+
+function deleteCustomer (customerId){
+	return fetch(API_URL + `/customer/${customerId}`, {
+		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json'
 		}

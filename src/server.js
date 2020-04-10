@@ -12,10 +12,6 @@ app.use(bodyParser.json()); // to make the app able to read requests with json
 
 let customers = [];
 
-app.get('/', (req, res) => {
-	res.send('hello');
-});
-
 app.put('/customer', (req, res) => {
     if(! validateCustomer(req.body.fullName, req.body.email)) {
         res.status(400).send();
