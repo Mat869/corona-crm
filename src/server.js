@@ -3,11 +3,7 @@ const bodyParser = require('body-parser');
 const isEmail = require('./utils/is-email');
 const isFullName = require('./utils/is-full-name');
 const app = express();
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-app.listen(port);
+
 
 app.use(express.static('public')); // to overcome CORS
 app.use(bodyParser.urlencoded({extended: true})); // to make the app able to read requests with json 
@@ -80,4 +76,8 @@ function validateCustomer(fullName, email) {
 	return isFullName(fullName) && isEmail(email);
 }
 
-app.listen(process.env.PORT);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
