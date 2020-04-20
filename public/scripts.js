@@ -1,4 +1,4 @@
-const API_URL = 'https://serene-mesa-70759.herokuapp.com';
+const API_URL = 'https://matteocrm.herokuapp.com';
 const newCustomerForm = document.getElementById('new-customer-form');
 const customerList = document.getElementById('customer-list');
 const editCustomerForm = document.getElementById('edit-customer-form');
